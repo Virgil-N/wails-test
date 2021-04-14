@@ -1,0 +1,18 @@
+{
+  "processors": [],
+  "plugins": [],
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "number-leading-zero": "always",
+    "color-hex-length": "long",
+    "string-quotes": "double",
+    "block-no-empty": null,
+    "property-case": null,
+    "property-no-unknown": null,
+    "at-rule-no-unknown": null,
+    "length-zero-no-unit": null,
+    "no-eol-whitespace": null,
+    "no-descending-specificity": null,
+    "selector-pseudo-class-no-unknown": null
+  }
+}
