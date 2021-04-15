@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-03-25 10:42:36
+ * Last Modified: 2021-04-15 03:54:06
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2020 ⚐
@@ -29,4 +29,5 @@ function App() {
   )
 }
 
-export default withRouter(App)
+// export default withRouter(App)
+export default App

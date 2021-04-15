@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, MemoryRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -30,7 +30,7 @@ message.config({
 //     <React.StrictMode>
 //       <App />
 //     </React.StrictMode>,
-//     document.getElementById("app")
+//     document.getElementById("root")
 //   );
 // });
 
@@ -40,9 +40,13 @@ const renderApp = (Component) => {
   ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename="/test">
+        {/* <BrowserRouter basename="/test">
           <Component></Component>
-        </BrowserRouter>
+        </BrowserRouter> */}
+        <MemoryRouter>
+          {/* <Component></Component> */}
+          <Route path={'/test'} component={Component}></Route>
+        </MemoryRouter>
       </PersistGate>
     </Provider>,
     document.getElementById('root')

@@ -1,26 +1,26 @@
 /**
- * Created Date: 2020-12-23 02:17:57
+ * Created Date: 2021-04-15 02:06:04
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-04-15 04:40:34
+ * Last Modified: 2021-04-15 03:50:46
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
- * Copyright (c) 2019 - 2020 ⚐
+ * Copyright (c) 2019 - 2021 ⚐
  * Virgil-N will save your soul!
  * -----
  */
 
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+// import { useSelector, useDispatch } from 'react-redux'
 // import { Button, Card, Form, Input, Row, Col } from 'antd'
-import {
-  UserOutlined,
-  LockOutlined,
-} from '@ant-design/icons'
+// import {
+//   UserOutlined,
+//   LockOutlined,
+// } from '@ant-design/icons'
 import variables from '@/styles/variables.module.scss'
 import Card from '@/components/card/Card'
-import LoginForm from './components/LoginForm'
+import LoginForm from '@/pages/login/components/LoginForm'
 
 function Login(props) {
   // const [username, setUsername] = useState('')

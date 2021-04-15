@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-03-25 11:16:32
+ * Last Modified: 2021-04-15 04:42:47
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2020 ⚐
@@ -89,4 +89,5 @@ PrivateRoute.propTypes = {
   routeList: PropTypes.array
 }
 
-export default withRouter(PrivateRoute)
+// export default withRouter(PrivateRoute)
+export default PrivateRoute

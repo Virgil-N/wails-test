@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-02-23 03:50:30
+ * Last Modified: 2021-04-15 05:21:27
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2020 ⚐
@@ -12,6 +12,7 @@
  */
 
 import React from 'react'
+import { MemoryRouter } from 'react-router-dom'
 import { Layout } from 'antd'
 import routeList from '@/routes/index'
 import PrivateRoute from '@/routes/privateRoute/PrivateRoute'
@@ -29,7 +30,9 @@ function Main() {
         <Header></Header>
         <Breadcrumb></Breadcrumb>
         <Content id="main-content">
-          <PrivateRoute routeList={routeList} />
+          <MemoryRouter>
+            <PrivateRoute routeList={routeList} />
+          </MemoryRouter>
         </Content>
       </Layout>
       <style jsx>{`
