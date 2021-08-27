@@ -35,12 +35,15 @@ func (s *MyStruct) WailsInit(runtime *wails.Runtime) error {
 func main() {
 
 	app := wails.CreateApp(&wails.AppConfig{
-		Width:  1024,
-		Height: 768,
-		Title:  "wails-test",
-		JS:     js,
-		CSS:    css,
-		Colour: "#131313",
+		Width:     1024,
+		Height:    768,
+		MinWidth:  400,
+		MinHeight: 400,
+		Resizable: true,
+		Title:     "wails-test",
+		JS:        js,
+		CSS:       css,
+		Colour:    "#F4F6F8",
 	})
 	app.Bind(basic)
 	app.Run()

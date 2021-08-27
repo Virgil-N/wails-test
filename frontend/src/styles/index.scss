@@ -1,0 +1,54 @@
+/*
+ * Created Date: 2020-12-23 03:28:35
+ * Author: Virgil-N
+ * Description:
+ * -----
+ * Last Modified: 2021-08-27 10:23:48
+ * Modified By: Virgil-N (lieut9011@126.com)
+ * -----
+ * Copyright (c) 2019 - 2020 ⚐
+ * Virgil-N will save your soul!
+ * -----
+ */
+
+@import './override.scss';
+@import './variables.module.scss';
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: $mainBgColor;
+  overflow: hidden;
+}
+
+// normal use
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.color {
+  color: red !important;
+}
+
+// 配合 antd 的 message
+.msg-content {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-left: 12px;
+}

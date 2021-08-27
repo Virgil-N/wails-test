@@ -2,19 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router';
 import 'core-js/stable';
-import './index.css';
 import App from './App';
+import { ThemeProvider } from "@material-ui/core";
+import theme from "./theme";
+import "./styles/index.scss";
+
 import * as serviceWorker from './serviceWorker';
 
 import * as Wails from '@wailsapp/runtime';
 
 Wails.Init(() => {
   ReactDOM.render(
-    <React.StrictMode>
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
-    </React.StrictMode>,
+    <ThemeProvider theme={theme}>
+      <React.StrictMode>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </React.StrictMode>
+    </ThemeProvider>,
     document.getElementById("app")
   )
 });

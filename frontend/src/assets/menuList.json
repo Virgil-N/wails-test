@@ -1,0 +1,58 @@
+[
+  {
+    "name": "User",
+    "path": "react/test/user",
+    "title": "用户",
+    "icon": "UserOutlined",
+    "children": [
+      {
+        "name": "File",
+        "path": "react/test/user/file",
+        "title": "用户资料",
+        "icon": "UserOutlined"
+      },
+      {
+        "name": "Privacy",
+        "path": "react/test/user/privacy",
+        "title": "用户隐私",
+        "icon": "VideoCameraOutlined"
+      }
+    ]
+  },
+  {
+    "name": "None",
+    "path": "react/test/none",
+    "title": "空",
+    "icon": "UserOutlined",
+    "children": [
+      {
+        "name": "Universe",
+        "path": "react/test/none/universe",
+        "title": "宇宙",
+        "icon": "VideoCameraOutlined",
+        "children": [
+          {
+            "name": "Galaxy",
+            "path": "react/test/none/universe/galaxy",
+            "title": "星系",
+            "icon": "VideoCameraOutlined",
+            "children": [
+              {
+                "name": "MilkyWayGalaxy",
+                "path": "react/test/none/universe/galaxy/milkyWayGalaxy",
+                "title": "银河系",
+                "icon": "UserOutlined"
+              },
+              {
+                "name": "LargeMagellanicCloud",
+                "path": "react/test/none/universe/galaxy/largeMagellanicCloud",
+                "title": "大麦哲伦星系",
+                "icon": "UserOutlined"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
