@@ -1,52 +1,27 @@
 /**
- * Created Date: 2020-12-23 02:17:57
+ * Created Date: 2021-08-27 11:44:18
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-04-15 04:40:34
+ * Last Modified: 2021-08-27 03:33:44
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
- * Copyright (c) 2019 - 2020 ⚐
+ * Copyright (c) 2019 - 2021 ⚐
  * Virgil-N will save your soul!
  * -----
  */
 
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-// import { Button, Card, Form, Input, Row, Col } from 'antd'
-import {
-  UserOutlined,
-  LockOutlined,
-} from '@ant-design/icons'
-import variables from '@/styles/variables.module.scss'
-import Card from '@/components/card/Card'
-import LoginForm from './components/LoginForm'
+import React, { useEffect } from 'react'
 
-function Login(props) {
-  // const [username, setUsername] = useState('')
-  // const [Password, setPassword] = useState('')
+const Login = () => {
 
-  const cardHeadStyle = {
-    backgroundColor: variables.cardHeadColor
-  }
-
-  const cardBodyStyle = {
-    backgroundColor: variables.cardBgColor,
-    borderColor: variables.cardBorderColor
-  }
+  useEffect(() => {
+    console.log('appState')
+  })
 
   return (
-    <div className="login-wrap">
-      <Card title="登录" content={<LoginForm></LoginForm>} headStyle={cardHeadStyle} bodyStyle={cardBodyStyle}></Card>
-      <style jsx>{`
-        .login-wrap {
-          width: 100%;
-          height: 100%;
-          display: grid;
-          justify-content: center;
-          align-content: center;
-        }
-      `}</style>
+    <div>
+      <p>this is login page</p>
     </div>
   )
 }

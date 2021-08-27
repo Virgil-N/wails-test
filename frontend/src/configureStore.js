@@ -1,9 +1,9 @@
 /**
- * Created Date: 2021-04-13 02:05:10
+ * Created Date: 2021-08-27 03:09:57
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-04-13 02:05:32
+ * Last Modified: 2021-08-27 03:15:10
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2021 ⚐
@@ -12,16 +12,16 @@
  */
 
 import { configureStore } from '@reduxjs/toolkit'
-import {
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER
-} from "redux-persist"
+// import {
+//   FLUSH,
+//   REHYDRATE,
+//   PAUSE,
+//   PERSIST,
+//   PURGE,
+//   REGISTER
+// } from "redux-persist"
 import logger from 'redux-logger'
-import { authTokenMiddleware } from '@/middleware/authToken'
+// import { authTokenMiddleware } from '@/middleware/authToken'
 import rootReducer from '@/store/reducers'
 
 export default function generateConfigureStore() {
@@ -32,10 +32,10 @@ export default function generateConfigureStore() {
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
       // 解决报错问题
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
-    }).concat(logger, authTokenMiddleware),
+      // serializableCheck: {
+      //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      // }
+    }).concat(logger, /*authTokenMiddleware*/),
     devTools: process.env.NODE_ENV !== 'production',
     preloadedState,
     enhancers: [],

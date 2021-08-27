@@ -2,7 +2,7 @@
  "name": "wails-test",
  "description": "Enter your project description",
  "author": {
-  "name": "Virgil N",
+  "name": "Virgil-N",
   "email": "lieut9011@126.com"
  },
  "version": "0.1.0",
@@ -12,7 +12,7 @@
   "install": "npm install",
   "build": "npm run build",
   "bridge": "src",
-  "serve": "npm run start"
+  "serve": "npm run serve"
  },
  "tags": "",
  "WailsVersion": "",
