@@ -2,14 +2,10 @@ package main
 
 import (
 	_ "embed"
-	"fmt"
+	_ "wails-test/store"
 
 	"github.com/wailsapp/wails"
 )
-
-func basic() string {
-	return "World!"
-}
 
 //go:embed frontend/build/static/js/main.js
 var js string
@@ -17,19 +13,16 @@ var js string
 //go:embed frontend/build/static/css/main.css
 var css string
 
-type MyStruct struct {
-	runtime *wails.Runtime
+type A struct {
+	Name string
 }
 
-func (s *MyStruct) WailsInit(runtime *wails.Runtime) error {
-	// Save runtime
-	s.runtime = runtime
+func NewA() *A {
+	return &A{}
+}
 
-	// Do some other initialisation
-	selectedFile := runtime.Dialog.SelectSaveFile()
-	fmt.Println(selectedFile)
-
-	return nil
+func (a *A) Say(s string) string {
+	return s
 }
 
 func main() {
@@ -45,8 +38,9 @@ func main() {
 		CSS:       css,
 		Colour:    "#F4F6F8",
 	})
-	app.Bind(basic)
+	app.Bind(NewA())
+	// s := store.NewAppStore()
+	// s.SetState("opopop")
+	// app.Bind(store.NewAppStore())
 	app.Run()
-	myStruct := MyStruct{}
-	myStruct.WailsInit(&wails.Runtime{})
 }

@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-08-27 11:11:51
+ * Last Modified: 2021-08-29 11:35:49
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2021 ⚐
@@ -11,7 +11,7 @@
  * -----
  */
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useHistory } from "react-router";
 import _JSXStyle from "styled-jsx/style";
 import {
@@ -28,6 +28,8 @@ import {
 import bgImage from "@/assets/images/xx1_1920x1080.jpg";
 // import config from "@/configs/config";
 // import { useSnackbar } from "notistack";
+
+const runtime = require('@wailsapp/runtime');
 
 function Copyright() {
   return (
@@ -95,6 +97,39 @@ const Login = () => {
     };
   });
 
+  const ss = useCallback(() => {
+    return runtime.Events.On("storeupdate", (store) => {
+      console.log("store changed: ", store)
+    })
+  }, [])
+
+  const up = useCallback(() => {
+    return runtime.Events.On("sendStore", (store) => {
+      console.log("get store: ", store)
+    })
+  }, [])
+
+  useEffect(() => {
+    ss()
+    up()
+    runtime.Events.On("sendStore", (store) => {
+      console.log("get store: ", store)
+    })
+    const upp = () => {
+      console.log("upp")
+      runtime.Events.Emit("getStore")
+    }
+    upp()
+    // var appState = runtime.Store.New("appStore", "hello")
+    
+    // appState.subscribe((state) => {
+    //   console.log('state', state)
+    // })
+    // if (window.backend.AppState) {
+    //   window.backend.AppState.SetState("oooooooo")
+    // }
+  }, [ss, up])
+
   const validateAccountValue = (params) => {
     if (params.trim() === "") {
       setAccountHelper({
@@ -161,6 +196,12 @@ const Login = () => {
   };
 
   const submitForm = async (event) => {
+    console.log(runtime)
+    // if (window.backend.AppState) {
+    //   window.backend.AppState.SetState("oooooooo")
+    // }
+    runtime.Events.Emit("storeupdate", "this is mes")
+    console.log(runtime.Store)
     if (isMountedRef.current) {
       if (event) {
         event.preventDefault();
