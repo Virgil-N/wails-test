@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-08-29 11:35:49
+ * Last Modified: 2021-09-24 08:38:28
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2021 ⚐
@@ -24,10 +24,11 @@ import {
   CssBaseline,
   makeStyles
 } from "@material-ui/core";
-// import JSEncrypt from "jsencrypt"
+import JSEncrypt from "jsencrypt";
 import bgImage from "@/assets/images/xx1_1920x1080.jpg";
-// import config from "@/configs/config";
-// import { useSnackbar } from "notistack";
+import config from "@/configs/config";
+import { login } from '@/api/user';
+import { useSnackbar } from "notistack";
 
 const runtime = require('@wailsapp/runtime');
 
@@ -77,10 +78,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  // let history = useHistory();
+  let history = useHistory();
   const isMountedRef = useIsMountedRef();
   const classes = useStyles();
-  // const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [isSendingRequest, setIsSendingRequest] = useState(false);
   const [account, setAccount] = useState("");
   const [accountHelper, setAccountHelper] = useState(() => {
@@ -98,37 +99,16 @@ const Login = () => {
   });
 
   const ss = useCallback(() => {
-    return runtime.Events.On("storeupdate", (store) => {
-      console.log("store changed: ", store)
-    })
-  }, [])
-
-  const up = useCallback(() => {
     return runtime.Events.On("sendStore", (store) => {
-      console.log("get store: ", store)
+      console.log("store changed: ", store)
     })
   }, [])
 
   useEffect(() => {
     ss()
-    up()
-    runtime.Events.On("sendStore", (store) => {
-      console.log("get store: ", store)
-    })
-    const upp = () => {
-      console.log("upp")
-      runtime.Events.Emit("getStore")
-    }
-    upp()
-    // var appState = runtime.Store.New("appStore", "hello")
+    runtime.Events.Emit("getStore")
     
-    // appState.subscribe((state) => {
-    //   console.log('state', state)
-    // })
-    // if (window.backend.AppState) {
-    //   window.backend.AppState.SetState("oooooooo")
-    // }
-  }, [ss, up])
+  }, [ss])
 
   const validateAccountValue = (params) => {
     if (params.trim() === "") {
@@ -196,12 +176,8 @@ const Login = () => {
   };
 
   const submitForm = async (event) => {
-    console.log(runtime)
-    // if (window.backend.AppState) {
-    //   window.backend.AppState.SetState("oooooooo")
-    // }
-    runtime.Events.Emit("storeupdate", "this is mes")
-    console.log(runtime.Store)
+    runtime.Events.Emit("updateStore", {appName: "wails-App"})
+    
     if (isMountedRef.current) {
       if (event) {
         event.preventDefault();
@@ -210,18 +186,18 @@ const Login = () => {
       validatePasswordValue(password);
       if (accountHelper.valid === true && passwordHelper.valid === true) {
         setIsSendingRequest(true);
-        // const encrypt = new JSEncrypt();
-        // encrypt.setPublicKey(process.env.REACT_APP_PUBLIC_KEY);
-        // const pwd = encrypt.encrypt(password);
-        // const sendData = JSON.stringify({ name: account, password: pwd });
-        // const res = await dispatch(userLogin(sendData));
-        // if (res && res.error) {
-        //   enqueueSnackbar(res.error.message, {variant: "error"});
-        // }
+        const encrypt = new JSEncrypt();
+        encrypt.setPublicKey(process.env.REACT_APP_PUBLIC_KEY);
+        const pwd = encrypt.encrypt(password);
+        const sendData = JSON.stringify({ name: account, password: pwd });
+        const res = await login(sendData);
+        if (res.code === 2000) {
+          // history.push("/main/home");
+          enqueueSnackbar("login success", {variant: "success"});
+        } else {
+          enqueueSnackbar(res.msg, {variant: "error"});
+        }
         setIsSendingRequest(false);
-        // if (res.payload && res.payload.code === 2000) {
-        //   history.push("/main/home");
-        // }
       }
     }
   };
@@ -233,7 +209,7 @@ const Login = () => {
         <div className={classes.paper}>
           {/* <img src={loginImg} className={classes.loginImg}></img> */}
           <Typography component="h1" variant="h3">
-            {/* {config.appName + " (v" + config.appVersion + ")"} */}
+            {config.appName + " (v" + config.appVersion + ")"}
           </Typography>
           <form className={classes.form} autoComplete="off">
             <div className="account-wrap">

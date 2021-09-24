@@ -6,6 +6,7 @@ import App from './App';
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme";
 import "./styles/index.scss";
+import { SnackbarProvider } from "notistack";
 
 import * as serviceWorker from './serviceWorker';
 
@@ -14,11 +15,19 @@ import * as Wails from '@wailsapp/runtime';
 Wails.Init(() => {
   ReactDOM.render(
     <ThemeProvider theme={theme}>
-      <React.StrictMode>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </React.StrictMode>
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <React.StrictMode>
+          <MemoryRouter>
+            <App />
+          </MemoryRouter>
+        </React.StrictMode>
+      </SnackbarProvider>
     </ThemeProvider>,
     document.getElementById("app")
   )
