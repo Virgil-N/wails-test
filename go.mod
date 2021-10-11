@@ -1,4 +1,4 @@
-module wails-test
+module github.com/Virgil-N/wails-test
 
 go 1.17
 

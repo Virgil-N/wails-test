@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-09-24 08:53:43
+ * Last Modified: 2021-10-09 03:02:31
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2021 ⚐
@@ -14,6 +14,8 @@
 const createProxyMiddleware = require('http-proxy-middleware')
 const https = require('https')
 const fs = require('fs')
+
+console.log(process.env.REACT_APP_SERVER_IP)
 
 module.exports = function (app) {
   app.use(createProxyMiddleware('/test/api', {

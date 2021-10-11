@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-09-24 08:38:28
+ * Last Modified: 2021-10-09 05:46:53
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2021 ⚐
@@ -98,17 +98,17 @@ const Login = () => {
     };
   });
 
-  const ss = useCallback(() => {
-    return runtime.Events.On("sendStore", (store) => {
-      console.log("store changed: ", store)
-    })
-  }, [])
+  // const ss = useCallback(() => {
+  //   return runtime.Events.On("sendStore", (store) => {
+  //     console.log("store changed: ", store)
+  //   })
+  // }, [])
 
-  useEffect(() => {
-    ss()
-    runtime.Events.Emit("getStore")
+  // useEffect(() => {
+  //   // ss()
+  //   // runtime.Events.Emit("getStore")
     
-  }, [ss])
+  // }, [ss])
 
   const validateAccountValue = (params) => {
     if (params.trim() === "") {
@@ -176,7 +176,7 @@ const Login = () => {
   };
 
   const submitForm = async (event) => {
-    runtime.Events.Emit("updateStore", {appName: "wails-App"})
+    // runtime.Events.Emit("updateStore", {appName: "wails-App"})
     
     if (isMountedRef.current) {
       if (event) {
@@ -189,15 +189,22 @@ const Login = () => {
         const encrypt = new JSEncrypt();
         encrypt.setPublicKey(process.env.REACT_APP_PUBLIC_KEY);
         const pwd = encrypt.encrypt(password);
-        const sendData = JSON.stringify({ name: account, password: pwd });
-        const res = await login(sendData);
-        if (res.code === 2000) {
-          // history.push("/main/home");
-          enqueueSnackbar("login success", {variant: "success"});
-        } else {
-          enqueueSnackbar(res.msg, {variant: "error"});
-        }
-        setIsSendingRequest(false);
+        const sendData = { Name: account, Password: pwd };
+        runtime.Events.Emit("login", sendData);
+        // try {
+        //   const res = await login(sendData);
+        //   if (res.code === 2000) {
+        //     // history.push("/main/home");
+        //     enqueueSnackbar("login success", {variant: "success"});
+        //   } else {
+        //     enqueueSnackbar(res.msg, {variant: "error"});
+        //   }
+        //   setIsSendingRequest(false);
+        // } catch(err) {
+        //   console.log("err: ", err);
+        //   enqueueSnackbar(err, {variant: "error"});
+        //   setIsSendingRequest(false);
+        // }
       }
     }
   };

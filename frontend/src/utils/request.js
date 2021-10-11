@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-07-23 09:10:22
+ * Last Modified: 2021-09-24 10:15:12
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2020 ⚐
@@ -11,8 +11,8 @@
  * -----
  */
 
-import axios from 'axios'
-import { getCookieByName } from '@/utils/cookie'
+import axios from 'axios';
+import { getCookieByName } from '@/utils/cookie';
 
 const service = axios.create({
   baseURL:  process.env.REACT_APP_PATH + process.env.REACT_APP_API_PREFIX,
@@ -22,25 +22,27 @@ const service = axios.create({
     withCredentials: true
   },
   timeout: 10000
-})
+});
 
 // Request interceptors
 service.interceptors.request.use(
   (config) => {
-    const accessToken = getCookieByName('react-gin-accessToken')
-    const refreshToken = getCookieByName('react-gin-refreshToken')
-    config.headers['Authorization'] = 'Bearer ' + accessToken
-    config.headers['Refresh-Token'] = 'Bearer ' + refreshToken
-    return config
+    const accessToken = getCookieByName('react-gin-accessToken');
+    const refreshToken = getCookieByName('react-gin-refreshToken');
+    config.headers['Authorization'] = 'Bearer ' + accessToken;
+    config.headers['Refresh-Token'] = 'Bearer ' + refreshToken;
+    return config;
   },
   (error) => {
-    Promise.reject(error)
+    console.log("error: ", error);
+    return Promise.reject(error.message);
   }
 )
 
 // Response interceptors
 service.interceptors.response.use(
   (response) => {
+    console.log(response);
     const res = { ...response.data }
     if (res && Object.prototype.hasOwnProperty.call(res, 'code') && res.code !== 2000) {
       if (res.code === 5001
@@ -49,18 +51,19 @@ service.interceptors.response.use(
           || res.code === 5004
           || res.code === 5005
           || res.code === 5006) {
-        console.log('用户未登录或登录错误')
-        window.location.href = window.location.origin + process.env.REACT_APP_PATH
+        console.log('用户未登录或登录错误');
+        window.location.href = window.location.origin + process.env.REACT_APP_PATH;
       }
-      return Promise.reject(new Error(res.msg || 'Error'))
+      return Promise.reject(res.msg);
     } else {
-      return res
+      return res;
     }
   },
   (error) => {
-    return Promise.reject(error)
+    console.log("response error: ", error);
+    return Promise.reject(error.message);
   }
 )
 
-export default service
+export default service;
 
