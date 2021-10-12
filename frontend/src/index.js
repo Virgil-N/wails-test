@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router';
+import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import generateConfigureStore from "./configureStore";
 import 'core-js/stable';
 import App from './App';
 import { ThemeProvider } from "@material-ui/core";
@@ -12,6 +16,11 @@ import * as serviceWorker from './serviceWorker';
 
 import * as Wails from '@wailsapp/runtime';
 
+// import Login from '@/pages/login/Login'
+
+const store = generateConfigureStore();
+const persistor = persistStore(store);
+
 Wails.Init(() => {
   ReactDOM.render(
     <ThemeProvider theme={theme}>
@@ -22,11 +31,18 @@ Wails.Init(() => {
           horizontal: 'right',
         }}
       >
-        <React.StrictMode>
+        {/* <React.StrictMode>
           <MemoryRouter>
             <App />
           </MemoryRouter>
-        </React.StrictMode>
+        </React.StrictMode> */}
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <MemoryRouter>
+              <App />
+            </MemoryRouter>
+          </PersistGate>
+        </Provider>
       </SnackbarProvider>
     </ThemeProvider>,
     document.getElementById("app")

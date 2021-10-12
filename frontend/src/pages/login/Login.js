@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-10-09 05:46:53
+ * Last Modified: 2021-10-12 02:22:05
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2021 ⚐
@@ -11,8 +11,10 @@
  * -----
  */
 
+import axios from 'axios';
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
 import _JSXStyle from "styled-jsx/style";
 import {
   Box,
@@ -27,10 +29,12 @@ import {
 import JSEncrypt from "jsencrypt";
 import bgImage from "@/assets/images/xx1_1920x1080.jpg";
 import config from "@/configs/config";
-import { login } from '@/api/user';
+// import { login } from '@/api/user';
+import { userLogin } from "@/store/reducers/user"
 import { useSnackbar } from "notistack";
 
 const runtime = require('@wailsapp/runtime');
+
 
 function Copyright() {
   return (
@@ -78,8 +82,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  let history = useHistory();
   const isMountedRef = useIsMountedRef();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const [isSendingRequest, setIsSendingRequest] = useState(false);
@@ -189,22 +194,27 @@ const Login = () => {
         const encrypt = new JSEncrypt();
         encrypt.setPublicKey(process.env.REACT_APP_PUBLIC_KEY);
         const pwd = encrypt.encrypt(password);
-        const sendData = { Name: account, Password: pwd };
-        runtime.Events.Emit("login", sendData);
-        // try {
-        //   const res = await login(sendData);
-        //   if (res.code === 2000) {
-        //     // history.push("/main/home");
-        //     enqueueSnackbar("login success", {variant: "success"});
-        //   } else {
-        //     enqueueSnackbar(res.msg, {variant: "error"});
-        //   }
-        //   setIsSendingRequest(false);
-        // } catch(err) {
-        //   console.log("err: ", err);
-        //   enqueueSnackbar(err, {variant: "error"});
-        //   setIsSendingRequest(false);
-        // }
+        const sendData = JSON.stringify({ name: account, password: pwd });
+        // runtime.Events.Emit("login", sendData);
+        try {
+          // const res = await axios.post("http://127.0.0.1:9292/user/login", sendData)
+          const res = await dispatch(userLogin(sendData))
+          if (res.payload && res.payload.code === 2000) {
+            // history.push("/main/home");
+            enqueueSnackbar("login success", {variant: "success"});
+          } else {
+            if (res.error && res.error.message) {
+              enqueueSnackbar(res.error.message, {variant: "error"});
+            } else {
+              enqueueSnackbar("unknow error", {variant: "error"});
+            }
+          }
+          setIsSendingRequest(false);
+        } catch(err) {
+          console.log("err: ", err);
+          enqueueSnackbar("error: " + err, {variant: "error"});
+          setIsSendingRequest(false);
+        }
       }
     }
   };

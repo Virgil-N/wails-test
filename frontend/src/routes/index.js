@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-08-27 11:53:32
+ * Last Modified: 2021-10-12 11:27:33
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2021 ⚐
@@ -21,13 +21,13 @@ const routeList = [
   //   meta: { title: "首页", icon: HomeIcon, requireLogin: true, hide: false },
   //   roles: ["admin", "manager", "visitor"]
   // },
-  // {
-  //   path: "/login",
-  //   name: "login",
-  //   component:  Login,
-  //   meta: { title: "登录", requireLogin: false, hide: false },
-  //   roles: []
-  // },
+  {
+    path: "/login",
+    name: "login",
+    component:  Login,
+    meta: { title: "登录", requireLogin: false, hide: false },
+    roles: []
+  },
   // {
   //   path: "/main/noPermissions",
   //   name: "noPermissions",
