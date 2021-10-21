@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-10-12 02:24:24
+ * Last Modified: 2021-10-21 05:08:20
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2020 ⚐
@@ -33,6 +33,7 @@ const initialState = userAdapter.getInitialState({
 export const userLogin = createAsyncThunk(
   'user/userLogin',
   async(params) => {
+    console.log('>>>>', params)
     const res = await login(params)
     return res
   }
@@ -85,7 +86,7 @@ const userSlice = createSlice({
     [userLogin.pending]: (state) => {
       // state.isLogin = false
     },
-    [userLogin.fulfilled]: ( state, action) => {
+    [userLogin.fulfilled]: (state, action) => {
       const res = action.payload
       if (res && res.code === 2000) {
         state.isLogin = true

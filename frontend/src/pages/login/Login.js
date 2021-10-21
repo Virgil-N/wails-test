@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-10-12 02:22:05
+ * Last Modified: 2021-10-21 04:53:45
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2021 ⚐
@@ -199,16 +199,16 @@ const Login = () => {
         try {
           // const res = await axios.post("http://127.0.0.1:9292/user/login", sendData)
           const res = await dispatch(userLogin(sendData))
-          if (res.payload && res.payload.code === 2000) {
-            // history.push("/main/home");
-            enqueueSnackbar("login success", {variant: "success"});
-          } else {
-            if (res.error && res.error.message) {
-              enqueueSnackbar(res.error.message, {variant: "error"});
-            } else {
-              enqueueSnackbar("unknow error", {variant: "error"});
-            }
-          }
+          // if (res.payload && res.payload.code === 2000) {
+          //   // history.push("/main/home");
+          //   enqueueSnackbar("login success", {variant: "success"});
+          // } else {
+          //   if (res.error && res.error.message) {
+          //     enqueueSnackbar(res.error.message, {variant: "error"});
+          //   } else {
+          //     enqueueSnackbar("unknow error", {variant: "error"});
+          //   }
+          // }
           setIsSendingRequest(false);
         } catch(err) {
           console.log("err: ", err);

@@ -6,18 +6,18 @@ import Login from '@/pages/login/Login'
 
 const App = () => {
   return (
-    <Route path="/" key="login" component={Login} />
-    // <Switch>
-    //   <Route path="/" exact key="root" render={()=><Redirect to="/main/home" />} />
-    //   <Route path="/main" key="main" component={Main} />
-    //   <Route path="/" key="login" component={Login} />
-    //   <Route path="/login" key="login" component={Login} />
-    //   <Route path="/notFound" key="notFound" component={NotFound} />
-    //   <Redirect to="/notFound" />
-    //   <Route exact path="/">
-    //     <Login />
-    //   </Route>
-    // </Switch>
+    // <Route path="/" key="login" component={Login} />
+    <Switch>
+      {/* <Route path="/" exact key="root" render={()=><Redirect to="/main/home" />} /> */}
+      {/* <Route path="/main" key="main" component={Main} /> */}
+      <Route path="/" key="login" component={Login} />
+      <Route path="/login" key="login" component={Login} />
+      {/* <Route path="/notFound" key="notFound" component={NotFound} /> */}
+      {/* <Redirect to="/notFound" /> */}
+      <Route exact path="/">
+        <Login />
+      </Route>
+    </Switch>
   )
 }
 
