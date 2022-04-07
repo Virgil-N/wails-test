@@ -3,7 +3,7 @@
  * Author: Virgil-N
  * Description:
  * -----
- * Last Modified: 2021-10-12 02:24:08
+ * Last Modified: 2021-10-21 05:16:22
  * Modified By: Virgil-N (lieut9011@126.com)
  * -----
  * Copyright (c) 2019 - 2020 ⚐
@@ -20,6 +20,9 @@ const service = axios.create({
   headers: {
     'Content-Type': 'application/json',
     withCredentials: true
+  },
+  options: {
+    responseType: 'json'
   },
   timeout: 10000
 });
@@ -42,8 +45,8 @@ service.interceptors.request.use(
 // Response interceptors
 service.interceptors.response.use(
   (response) => {
-    console.log(response);
-    const res = { ...response.data }
+    console.log(JSON.stringify(response));
+    const res = { ...JSON.parse(response.data) }
     if (res && Object.prototype.hasOwnProperty.call(res, 'code') && res.code !== 2000) {
       if (res.code === 5001
           || res.code === 5002
